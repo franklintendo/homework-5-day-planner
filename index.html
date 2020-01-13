@@ -34,7 +34,7 @@
                 9AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="nineAM" name="tasks" placeholder="Enter tasks"></textarea>
                 
             </div>
             <div class="col-2 pl-0 dayplanner-save">
@@ -46,7 +46,7 @@
                 10AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="tenAM" name="tasks" placeholder="Enter tasks"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -57,7 +57,7 @@
                 11AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="elevenAM" name="tasks" placeholder="Enter tasks"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -68,7 +68,36 @@
         // Initialize moment.js
         moment().format();
 
-        //
+        // Set up an object to correspond the user's tasks to
+        // the hours within a day
+        var dayPlannerTasks = {
+            nineAM: " ",
+            tenAM: " ",
+            elevenAM: " ",
+            twelvePM: " ",
+            onePM: " ",
+            twoPM: " ",
+            threePM: " ",
+            fourPM: " ",
+            fivePM: " "
+        }
+
+        // If user enters a value in a certain hour's textarea,
+        // then store their entry into the dayPlannerTasks array
+        $(document).ready(function() {
+            $("textarea").on("focus", function(event){
+                console.log(event.target.id);
+                $(event.target).on("keyup", function(){
+                    // console.log(event.target.value); 
+                    dayPlannerTasks[event.target.id] = event.target.value;
+                    console.log(dayPlannerTasks);
+                });
+            });
+        });
+
+        // See what the user's current time is
+        // and change the colors of the text areas depending
+        // on if it's in the past, present, or future
     </script>
 </body>
 </html>
