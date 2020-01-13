@@ -34,7 +34,7 @@
                 9AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="nineAM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="nineAM"></textarea>
                 
             </div>
             <div class="col-2 pl-0 dayplanner-save">
@@ -46,7 +46,7 @@
                 10AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="tenAM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="tenAM"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -57,7 +57,7 @@
                 11AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="elevenAM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="elevenAM"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -68,7 +68,7 @@
                 12PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="twelvePM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="twelvePM"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -79,7 +79,7 @@
                 1PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="onePM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="onePM"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -90,7 +90,7 @@
                 2PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="twoPM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="twoPM"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -101,7 +101,7 @@
                 3PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="threePM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="threePM"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -112,7 +112,7 @@
                 4PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="fourPM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="fourPM"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -123,7 +123,7 @@
                 5PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="fivePM" name="tasks" placeholder="Enter tasks"></textarea>
+                <textarea id="fivePM"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -159,9 +159,17 @@
                     // console.log(event.target.value); 
                     dayPlannerTasks[event.target.id] = event.target.value;
                     // console.log(dayPlannerTasks);
-                    // Store the user's entry in their local storage
-                    localStorage.setItem("tasks", JSON.stringify(dayPlannerTasks));
+                    // // Store the user's entry in their local storage
+                    // localStorage.setItem("tasks", JSON.stringify(dayPlannerTasks));
                 });
+            });
+            $(".btn-info").on("click", function(event){
+                // Put the value in the corresponding text area into the relevant
+                // key name in the array
+                // console.log();
+
+                // Store the user's entry in their local storage
+                localStorage.setItem("tasks", JSON.stringify(dayPlannerTasks))
             });
         });
 
@@ -178,7 +186,6 @@
                     // console.log(textAreas[i].id);
                     textAreas[i].value = dayPlannerTasks[textAreas[i].id];
                 }
-                // dayPlannerTasks
             }
         }
 
