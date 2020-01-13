@@ -1,0 +1,17 @@
+.dayplanner-textarea textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    min-height: auto;
+    padding: 7px;
+    border: none;
+}
+
+.dayplanner-time {
+    padding: 7px;
+}
+
+.dayplanner-save .btn{
+    border-radius: 0;
+    height: 100%;
+}
