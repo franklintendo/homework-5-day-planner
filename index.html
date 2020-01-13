@@ -148,18 +148,39 @@
             fivePM: " "
         }
 
+        renderTasks();
+
         // If user enters a value in a certain hour's textarea,
         // then store their entry into the dayPlannerTasks array
         $(document).ready(function() {
             $("textarea").on("focus", function(event){
-                console.log(event.target.id);
+                // console.log(event.target.id);
                 $(event.target).on("keyup", function(){
                     // console.log(event.target.value); 
                     dayPlannerTasks[event.target.id] = event.target.value;
-                    console.log(dayPlannerTasks);
+                    // console.log(dayPlannerTasks);
+                    // Store the user's entry in their local storage
+                    localStorage.setItem("tasks", JSON.stringify(dayPlannerTasks));
                 });
             });
         });
+
+        // Grab existing tasks that a user set in previous session and 
+        // display in textareas
+
+        function renderTasks() {
+            if (localStorage.getItem("tasks")) {
+                dayPlannerTasks = JSON.parse(localStorage.getItem("tasks"));
+                // console.log(Object.keys(dayPlannerTasks).length);
+                var textAreas = $('.dayplanner-textarea textarea');
+                // console.log(textAreas);
+                for (var i=0;i < textAreas.length;i++) {
+                    // console.log(textAreas[i].id);
+                    textAreas[i].value = dayPlannerTasks[textAreas[i].id];
+                }
+                // dayPlannerTasks
+            }
+        }
 
         // See what the user's current time is
         // and change the colors of the text areas depending
