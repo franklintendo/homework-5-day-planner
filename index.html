@@ -24,11 +24,11 @@
             <div class="col-12 text-center border-bottom">
                 <h1>Work Day Scheduler</h1>
                 <p>Plan out your day by entering in your tasks below.</p>
-                <h3>(Insert Current Date Here)</h3>
+                <h3 id="current-date">(Insert Current Date Here)</h3>
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container mb-5">
         <div class="row mt-1" data-state="past">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 9AM
@@ -131,9 +131,6 @@
         </div>
     </div>
     <script>
-        // Initialize moment.js
-        moment().format();
-
         // Set up an object to correspond the user's tasks to
         // the hours within a day
         var dayPlannerTasks = {
@@ -148,27 +145,31 @@
             fivePM: " "
         }
 
+        // Find current date and display in header
+        // var date = new Date();
+        // console.log(date.toDateString());
+        // Checking moment.js
+        // moment().format();
+        var currentDate = moment().format('dddd - MMMM Do, YYYY');
+        // console.log(currentDate);
+
+        $("#current-date").text(currentDate);
+
         renderTasks();
 
         // If user enters a value in a certain hour's textarea,
-        // then store their entry into the dayPlannerTasks array
+        // update the dayPlannerTasks array
         $(document).ready(function() {
             $("textarea").on("focus", function(event){
-                // console.log(event.target.id);
                 $(event.target).on("keyup", function(){
-                    // console.log(event.target.value); 
+                    // Put the value in the corresponding text area into the relevant key name in the array
                     dayPlannerTasks[event.target.id] = event.target.value;
                     // console.log(dayPlannerTasks);
-                    // // Store the user's entry in their local storage
-                    // localStorage.setItem("tasks", JSON.stringify(dayPlannerTasks));
                 });
             });
             $(".btn-info").on("click", function(event){
-                // Put the value in the corresponding text area into the relevant
-                // key name in the array
-                // console.log();
-
                 // Store the user's entry in their local storage
+                // if user clicks on the save button
                 localStorage.setItem("tasks", JSON.stringify(dayPlannerTasks))
             });
         });
@@ -190,6 +191,7 @@
         }
 
         // See what the user's current time is
+        
         // and change the colors of the text areas depending
         // on if it's in the past, present, or future
     </script>
