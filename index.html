@@ -138,8 +138,6 @@
 
         // Check current hour
         var currentHour = moment().format('ha');
-        var currentMidday = moment().format('a');
-        console.log(currentMidday);
 
 
         // Set up an object to correspond the user's tasks to
@@ -156,6 +154,9 @@
             fivePM: " "
         }
 
+        // Run the functions to display the tasks set in local storage
+        // and see if the text area is representing an hour that is in the past, present, or future
+        // of the current day
         renderTasks();
         tasksColors();
 
@@ -202,14 +203,15 @@
                 // textarea focused on in the loop
                 textAreaId = $(textAreas[i]);
                 textAreaTime = textAreaId.data("time");
-                textAreaMidday = textAreaId.data("midday");
 
+                // Take the current hour and the textarea
+                // and parse it in moment.js
                 var currentMoment = moment(currentHour, "ha");
                 var textAreaMoment = moment(textAreaTime, "ha");
-                // console.log(textAreas[i]);
-                console.log("textAreaTime = " + textAreaTime);
-                // console.log("currentHour = " + currentHour);
-                console.log(textAreaMoment.isBefore(currentMoment)); 
+                
+                // Check if the text area hour is before the current hour and apply the relevant class
+                // Changes the colors of the text areas depending on if textarea is past, present, or future
+                // console.log(textAreaMoment.isBefore(currentMoment)); 
                 if (textAreaTime === currentHour) {
                     textAreaId.attr("class","present");
                 } else if (textAreaMoment.isBefore(currentMoment) === true) {
@@ -220,10 +222,6 @@
             }
         }
 
-        
-        
-        // and change the colors of the text areas depending
-        // on if it's in the past, present, or future
     </script>
 </body>
 </html>
