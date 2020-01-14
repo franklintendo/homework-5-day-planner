@@ -29,35 +29,35 @@
         </div>
     </div>
     <div class="container mb-5">
-        <div class="row mt-1" data-state="past">
+        <div class="row mt-1">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 9AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="nineAM"></textarea>
+                <textarea id="nineAM" data-time="9am" data-midday="am"</textarea>
                 
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
             </div>
         </div>
-        <div class="row mt-1" data-state="present">
+        <div class="row mt-1">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 10AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="tenAM"></textarea>
+                <textarea id="tenAM" data-time="10pm" data-midday="am"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
             </div>
         </div>
-        <div class="row mt-1" data-state="future">
+        <div class="row mt-1">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 11AM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="elevenAM"></textarea>
+                <textarea id="elevenAM" data-time="11am" data-midday="am"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -68,62 +68,62 @@
                 12PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="twelvePM"></textarea>
+                <textarea id="twelvePM" data-time="12pm" data-midday="pm"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
             </div>
         </div>
-        <div class="row mt-1" data-state="future">
+        <div class="row mt-1">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 1PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="onePM"></textarea>
+                <textarea id="onePM" data-time="1pm" data-midday="pm"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
             </div>
         </div>
-        <div class="row mt-1" data-state="future">
+        <div class="row mt-1">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 2PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="twoPM"></textarea>
+                <textarea id="twoPM" data-time="2pm" data-midday="pm"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
             </div>
         </div>
-        <div class="row mt-1" data-state="future">
+        <div class="row mt-1">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 3PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="threePM"></textarea>
+                <textarea id="threePM" data-time="3pm" data-midday="pm"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
             </div>
         </div>
-        <div class="row mt-1" data-state="future">
+        <div class="row mt-1">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 4PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="fourPM"></textarea>
+                <textarea id="fourPM" data-time="4pm" data-midday="pm"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
             </div>
         </div>
-        <div class="row mt-1" data-state="future">
+        <div class="row mt-1">
             <div class="col-2 dayplanner-time text-right border-top border-bottom">
                 5PM
             </div>
             <div class="col-8 px-0 border dayplanner-textarea">
-                <textarea id="fivePM"></textarea>
+                <textarea id="fivePM" data-time="5pm" data-midday="pm"></textarea>
             </div>
             <div class="col-2 pl-0 dayplanner-save">
                 <button class="btn btn-block btn-info rounded-right">Save</button>
@@ -131,6 +131,17 @@
         </div>
     </div>
     <script>
+
+        // Find current date and display in header
+        var currentDate = moment().format('dddd - MMMM Do, YYYY');
+        $("#current-date").text(currentDate);
+
+        // Check current hour
+        var currentHour = moment().format('ha');
+        var currentMidday = moment().format('a');
+        console.log(currentMidday);
+
+
         // Set up an object to correspond the user's tasks to
         // the hours within a day
         var dayPlannerTasks = {
@@ -145,17 +156,8 @@
             fivePM: " "
         }
 
-        // Find current date and display in header
-        // var date = new Date();
-        // console.log(date.toDateString());
-        // Checking moment.js
-        // moment().format();
-        var currentDate = moment().format('dddd - MMMM Do, YYYY');
-        // console.log(currentDate);
-
-        $("#current-date").text(currentDate);
-
         renderTasks();
+        tasksColors();
 
         // If user enters a value in a certain hour's textarea,
         // update the dayPlannerTasks array
@@ -174,6 +176,8 @@
             });
         });
 
+        
+
         // Grab existing tasks that a user set in previous session and 
         // display in textareas
 
@@ -186,11 +190,37 @@
                 for (var i=0;i < textAreas.length;i++) {
                     // console.log(textAreas[i].id);
                     textAreas[i].value = dayPlannerTasks[textAreas[i].id];
+                    
                 }
             }
         }
 
-        // See what the user's current time is
+        function tasksColors() {
+            var textAreas = $('.dayplanner-textarea textarea');
+            for (var i=0;i < textAreas.length;i++) {
+                // Grab the data attribute time from the
+                // textarea focused on in the loop
+                textAreaId = $(textAreas[i]);
+                textAreaTime = textAreaId.data("time");
+                textAreaMidday = textAreaId.data("midday");
+
+                var currentMoment = moment(currentHour, "ha");
+                var textAreaMoment = moment(textAreaTime, "ha");
+                // console.log(textAreas[i]);
+                console.log("textAreaTime = " + textAreaTime);
+                // console.log("currentHour = " + currentHour);
+                console.log(textAreaMoment.isBefore(currentMoment)); 
+                if (textAreaTime === currentHour) {
+                    textAreaId.attr("class","present");
+                } else if (textAreaMoment.isBefore(currentMoment) === true) {
+                    textAreaId.attr("class","past");
+                } else {
+                    textAreaId.attr("class","future");
+                }
+            }
+        }
+
+        
         
         // and change the colors of the text areas depending
         // on if it's in the past, present, or future
